@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forma</title>
+  <style>
+    body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; background: #f2f4f8; }
+    form { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,.1); width: 320px; }
+    h2 { margin-top: 0; }
+    input { width: 100%; padding: 12px; margin-bottom: 14px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+    button { width: 100%; padding: 12px; border: 0; border-radius: 8px; background: #229ed9; color: #fff; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <form id="f">
+    <h2 id="title"></h2>
+    <input id="value" required>
+    <button>Yuborish</button>
+  </form>
+
+  <script>
+    const labels = { name: "Name", message: "Message", link: "Link", gmail: "Gmail" };
+    const types  = { name: "text", message: "text", link: "url", gmail: "email" };
+
+    const field = new URLSearchParams(location.search).get("f");
+    const form = document.getElementById("f");
+
+    if (!labels[field]) {
+      form.innerHTML = "<p>Noto'g'ri link. Botdagi tugmani bosing.</p>";
+    } else {
+      const input = document.getElementById("value");
+      document.getElementById("title").textContent = labels[field];
+      input.placeholder = labels[field];
+      input.type = types[field];
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        await fetch("/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ field, value: input.value })
+        });
+        alert("Yuborildi!");
+        input.value = "";
+      });
+    }
+  </script>
+</body>
+</html>

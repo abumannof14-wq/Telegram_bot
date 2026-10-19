@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Instagram</title>
+<style>
+  :root{
+    --bg:#fafafa;
+    --card-border:#dbdbdb;
+    --text:#262626;
+    --muted:#8e8e8e;
+    --blue:#0095f6;
+    --blue-disabled:#b2dffc;
+    --divider:#dbdbdb;
+    --input-bg:#fafafa;
+    --input-border:#dbdbdb;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#000;
+      --card-border:#262626;
+      --text:#f5f5f5;
+      --muted:#a8a8a8;
+      --input-bg:#000;
+      --input-border:#363636;
+      --divider:#262626;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#000;
+    --card-border:#262626;
+    --text:#f5f5f5;
+    --muted:#a8a8a8;
+    --input-bg:#000;
+    --input-border:#363636;
+    --divider:#262626;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    height:100%;
+    margin:0;
+    background:var(--bg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--text);
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  .wrap{
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:24px 16px 10px;
+  }
+  .card{
+    width:100%;
+    max-width:350px;
+    border:1px solid var(--card-border);
+    border-radius:1px;
+    padding:36px 40px 24px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background:var(--bg);
+  }
+  @media (max-width:420px){
+    .card{ border:none; padding:28px 24px 12px; }
+  }
+  .logo{
+    font-family:'Brush Script MT','Segoe Script',cursive;
+    font-size:52px;
+    margin:10px 0 28px;
+    font-weight:400;
+    letter-spacing:0.5px;
+  }
+  form{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .field{
+    position:relative;
+    width:100%;
+  }
+  input{
+    width:100%;
+    padding:9px 8px;
+    font-size:12px;
+    border:1px solid var(--input-border);
+    background:var(--input-bg);
+    color:var(--text);
+    border-radius:3px;
+    outline:none;
+  }
+  input:focus{ border-color:#a8a8a8; }
+  label{
+    position:absolute;
+    left:9px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:12px;
+    color:var(--muted);
+    pointer-events:none;
+    transition:all .12s ease;
+  }
+  input:focus + label,
+  input:not(:placeholder-shown) + label{
+    top:3px;
+    font-size:9px;
+    transform:translateY(0);
+  }
+  input:focus,
+  input:not(:placeholder-shown){
+    padding-top:14px;
+    padding-bottom:4px;
+  }
+  .show-pass{
+    position:absolute;
+    right:8px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:12px;
+    font-weight:600;
+    color:var(--text);
+    background:none;
+    border:none;
+    cursor:pointer;
+  }
+  .login-btn{
+    margin-top:12px;
+    background:var(--blue);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:8px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .login-btn:disabled{
+    background:var(--blue-disabled);
+    cursor:default;
+  }
+  .divider{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:18px 0;
+    width:100%;
+  }
+  .divider .line{ flex:1; height:1px; background:var(--divider); }
+  .divider span{ font-size:13px; font-weight:600; color:var(--muted); }
+  .fb-login{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#385185;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    margin-bottom:18px;
+  }
+  .fb-login svg{ width:18px; height:18px; }
+  .forgot{
+    font-size:12px;
+    color:#00376b;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .forgot{ color:#e0f2ff; }
+  }
+  .signup-card{
+    width:100%;
+    max-width:350px;
+    border:1px solid var(--card-border);
+    border-radius:1px;
+    margin-top:10px;
+    padding:20px;
+    text-align:center;
+    font-size:14px;
+  }
+  @media (max-width:420px){ .signup-card{ border:none; } }
+  .signup-card a{ color:var(--blue); font-weight:600; text-decoration:none; }
+  .get-app{
+    margin:20px 0 10px;
+    font-size:14px;
+    text-align:center;
+  }
+  .badges{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    margin-top:12px;
+  }
+  .badges div{
+    border:1px solid var(--card-border);
+    border-radius:6px;
+    padding:6px 14px;
+    font-size:11px;
+    color:var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="logo">Instagram</div>
+    <form id="loginForm" autocomplete="off">
+      <div class="field">
+        <input type="text" id="username" placeholder=" " required>
+        <label for="username">Telefon raqami, foydalanuvchi nomi yoki email</label>
+      </div>
+      <div class="field">
+        <input type="password" id="password" placeholder=" " required>
+        <label for="password">Parol</label>
+        <button type="button" class="show-pass" id="toggleBtn">Ko'rsatish</button>
+      </div>
+      <button type="submit" class="login-btn" id="loginBtn" disabled>Kirish</button>
+    </form>
+
+    <div class="divider"><div class="line"></div><span>YOKI</span><div class="line"></div></div>
+    <a href="#" class="forgot">Parolni unutdingizmi?</a>
+  </div>
+
+  <div class="signup-card">
+    Hisobingiz yo'qmi? <a href="#">Ro'yxatdan o'tish</a>
+  </div>
+
+  <div class="get-app">
+    Ilovani oling.
+    <div class="badges">
+      <div>App Store</div>
+      <div>Google Play</div>
+      <div>Microsoft Store</div>
+    </div>
+  </div>
+</div>
+
+<script src="form.js"></script>
+</body>
+</html>

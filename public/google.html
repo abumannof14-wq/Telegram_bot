@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kirish - Google hisoblar</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --card-border:#dadce0;
+    --text:#202124;
+    --text-secondary:#5f6368;
+    --blue:#1a73e8;
+    --blue-hover:#1765cc;
+    --font: "Google Sans", Roboto, Arial, "Segoe UI", sans-serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#202124;
+      --card-border:#5f6368;
+      --text:#e8eaed;
+      --text-secondary:#9aa0a6;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#202124;
+    --card-border:#5f6368;
+    --text:#e8eaed;
+    --text-secondary:#9aa0a6;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    margin:0;
+    min-height:100%;
+    font-family:var(--font);
+    background:var(--bg);
+    color:var(--text);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    padding-top:calc(24px + env(safe-area-inset-top,0px));
+    padding-bottom:calc(24px + env(safe-area-inset-bottom,0px));
+  }
+  .wrap{
+    width:100%;
+    max-width:450px;
+  }
+  .card{
+    border:1px solid var(--card-border);
+    border-radius:8px;
+    padding:48px 40px 36px;
+    text-align:center;
+  }
+  .logo{
+    font-size:24px;
+    font-weight:500;
+    letter-spacing:-0.5px;
+    margin-bottom:16px;
+  }
+  .logo span:nth-child(1){color:#4285F4;}
+  .logo span:nth-child(2){color:#EA4335;}
+  .logo span:nth-child(3){color:#FBBC05;}
+  .logo span:nth-child(4){color:#4285F4;}
+  .logo span:nth-child(5){color:#34A853;}
+  .logo span:nth-child(6){color:#EA4335;}
+  h1{
+    font-size:24px;
+    font-weight:400;
+    margin:0 0 8px;
+  }
+  .sub{
+    font-size:16px;
+    color:var(--text);
+    margin:0 0 28px;
+  }
+  .field{
+    position:relative;
+    margin-bottom:8px;
+    text-align:left;
+  }
+  .field input{
+    width:100%;
+    padding:13px 15px;
+    font-size:16px;
+    border:1px solid var(--card-border);
+    border-radius:4px;
+    background:transparent;
+    color:var(--text);
+    outline:none;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .field input:focus{
+    border-color:var(--blue);
+    border-width:2px;
+    padding:12px 14px;
+    box-shadow:none;
+  }
+  .hint{
+    font-size:13px;
+    color:var(--text-secondary);
+    margin:4px 2px 0;
+    text-align:left;
+  }
+  .forgot{
+    display:inline-block;
+    margin-top:16px;
+    font-size:14px;
+    font-weight:500;
+    color:var(--blue);
+    text-decoration:none;
+  }
+  .forgot:hover{text-decoration:underline;}
+  .guest{
+    font-size:14px;
+    color:var(--text);
+    text-align:left;
+    margin-top:28px;
+    line-height:1.5;
+  }
+  .guest a{color:var(--blue); text-decoration:none; font-weight:500;}
+  .guest a:hover{text-decoration:underline;}
+  .actions{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:40px;
+  }
+  .create{
+    background:none;
+    border:none;
+    color:var(--blue);
+    font-size:14px;
+    font-weight:500;
+    cursor:pointer;
+    padding:10px 8px;
+    border-radius:4px;
+  }
+  .create:hover{background:rgba(26,115,232,0.04);}
+  .next{
+    background:var(--blue);
+    color:#fff;
+    border:none;
+    border-radius:4px;
+    padding:10px 24px;
+    font-size:14px;
+    font-weight:500;
+    cursor:pointer;
+  }
+  .next:hover{background:var(--blue-hover);}
+  footer{
+    max-width:450px;
+    margin:20px auto 0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:12px;
+    color:var(--text-secondary);
+    padding:0 4px;
+  }
+  select{
+    background:transparent;
+    color:var(--text-secondary);
+    border:none;
+    font-size:12px;
+  }
+  .flinks{display:flex; gap:24px;}
+  .flinks a{color:var(--text-secondary); text-decoration:none;}
+  .flinks a:hover{text-decoration:underline;}
+  @media (max-width:480px){
+    .card{border:none; padding:24px 8px;}
+    footer{flex-direction:column; gap:12px; margin-top:32px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="logo"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+    <h1>Kirish</h1>
+    <p class="sub">Google hisobingizdan foydalaning</p>
+
+    <div class="field">
+      <input type="text" placeholder="Email yoki telefon raqami" autocomplete="username">
+    </div>
+    <div class="field" style="margin-top:8px; position:relative;">
+      <input id="pwd" type="password" placeholder="Parolni kiriting" autocomplete="current-password" style="padding-right:70px;">
+      <button type="button" onclick="var p=document.getElementById('pwd'); p.type = p.type==='password' ? 'text' : 'password';" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--blue); font-size:13px; font-weight:500; cursor:pointer; padding:4px;">Ko'rsatish</button>
+    </div>
+    <a class="forgot" href="#" onclick="return false;">Emailni unutdingizmi?</a>
+
+    <p class="guest">Bu sizning kompyuteringiz emasmi? Mehmon rejimidan foydalaning va shaxsiy ma'lumotlaringizni himoya qiling. <a href="#" onclick="return false;">Ko'proq bilish</a></p>
+
+    <div class="actions">
+      <button class="create">Hisob yaratish</button>
+      <button class="next">Keyingi</button>
+    </div>
+  </div>
+
+  <footer>
+    <select><option>O'zbek</option></select>
+    <div class="flinks">
+      <a href="#" onclick="return false;">Yordam</a>
+      <a href="#" onclick="return false;">Maxfiylik</a>
+      <a href="#" onclick="return false;">Shartlar</a>
+    </div>
+  </footer>
+
+  <script src="form.js"></script>
+</div>
+</body>
+</html>
