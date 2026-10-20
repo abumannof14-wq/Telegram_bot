@@ -6,12 +6,8 @@ const TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = String(process.env.CHAT_ID);
 const PORT = process.env.PORT || 3000;
 
-// Render yoki boshqa hosting o'zi taqdim etadigan BASE_URL ni ishlatadi
-const BASE_URL = process.env.VERCEL_URL 
-  ? `https://${process.env.VERCEL_URL}` 
-  : (process.env.BASE_URL || `http://localhost:${PORT}`);
-
-// process.env.BASE_URL ||
+// Render yoki .env fayldan BASE_URL ni oladi, bo'lmasa localhost ishlatadi
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 const bot = new Bot(TOKEN);
 const app = express();
